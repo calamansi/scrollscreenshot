@@ -6,6 +6,17 @@ Make Android screenshots of scrollable screen content - brought to you by [PGS S
 
 This tool makes a number of screenshots, scrolling screen content automatically between each shot. By default status bar and navigation bar are included only once.
 
+
+
+This software has been modified by [Calamansi](https://github.com/calamansi/) in the following way:
+ * take several multi-page (composite) screen shots (use option -f)
+ * scroll to the very top of a long screen to stitch top-down without taking screenshots (see Todo)
+   (use option -t to determine the number of pages to scroll up)
+
+ https://github.com/calamansi/scrollscreenshot
+
+
+
 ![Illustration how images are merged](https://github.com/PGSSoft/scrollscreenshot/blob/master/illustration.png "Illustration how images are merged")
 
 
@@ -16,7 +27,7 @@ Documentation:
 Usage: com.pgssoft.scrollscreenshot.ScrollScreenShot [options]
   Options:
     -c, --count
-       Number of screenshot to take
+       Number of pages in one composite screenshot
        Default: 5
     -v, --device
        Device ID, first device is used if not specified (i.e. "4df1902336814fa6"
@@ -24,13 +35,16 @@ Usage: com.pgssoft.scrollscreenshot.ScrollScreenShot [options]
     -d, --direction
        Swipe direction: topdown (default), leftright (implies "--stitch none")
        Default: topdown
-    -h, --help
-       Display this help
-       Default: false
     -e, --inertia
        Inertia of content, how many pixels are required to start dragging. Use
        non-zero value if there are duplicated stripes.
        Default: 0
+    -f, --files
+       Number of composite screenshots (files) to be created (use "-c" to determine number of pages in a composite)
+       Default: 0
+    -h, --help
+       Display this help
+       Default: false
   * -i, --inputdevice
        Digitizer input device number, N in /dev/input/eventN
        Default: 1
@@ -43,6 +57,11 @@ Usage: com.pgssoft.scrollscreenshot.ScrollScreenShot [options]
        Stitch mode: full (smooth stitch), none (merged full screenshots),
        separate (separate files)
        Default: full
+    -t, --top
+        Scroll up only, do not take screenshots
+        t > 0 giving the number of pages (screen heights) to scroll up.
+        Overrides any other setting
+        Default: 0 (not scrolling)
 
 ```
 
@@ -85,7 +104,7 @@ Left-to-right mode will give you something like this:
 <img src="https://github.com/PGSSoft/scrollscreenshot/blob/master/samplehorizontal.png" alt="SAMPLE" width="800">
 
 
-Todo:
+Todo (original source):
 -----
 
 * scrolling in all 4 directions
@@ -95,12 +114,14 @@ Todo:
 Changelog
 ---------
 
-* 0.1 - initial release, only top-down scrolling for first device found by ADB
-* 0.2 - scrolling top-down and left-right, stitch now works in smooth/none/separate modes, ADB device can be choosen by id
+* 0.1 - forked and modified to take several composite screenshots rather than just one as in the [original source](https://github.com/PGSSoft/scrollscreenshot/)
 
 
 Acknowledgments
 ---------------
+
+* software development by [PGS Software SA](http://www.pgs-soft.com)
+  https://github.com/PGSSoft/scrollscreenshot/
 
 * description of input events was taken from
 [this blog post](http://ktnr74.blogspot.com/2013/06/emulating-touchscreen-interaction-with.html)
