@@ -95,7 +95,19 @@ You can now start screen capturing. Download [latest multi-page scrollscreenshot
 java -jar scrollscreenshotmultipage.jar com.pgssoft.scrollscreenshot.ScrollScreenShot -i 2
 ```
 
-If eveything goes well, you will get file `out.png` with something like:
+scroll up by 1000 screen heights
+```
+java -jar scrollscreenshotmultipage.jar com.pgssoft.scrollscreenshot.ScrollScreenShot -i 2 -t 1000
+```
+
+take 10 multi-page (composite) screenshots consisting of 25 pages each (my phone as an inertia of 8 px) seamlessly stiched.
+```
+java -jar scrollscreenshotmultipage.jar com.pgssoft.scrollscreenshot.ScrollScreenShot -i 2  -e 8 -s full -c 25 -f 10
+```
+
+
+
+If eveything goes well, you will get file `out_01.png` with something like:
 
 <img src="https://github.com/PGSSoft/scrollscreenshot/blob/master/sample.png" alt="SAMPLE" width="200">
 
