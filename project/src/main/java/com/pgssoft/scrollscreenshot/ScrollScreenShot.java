@@ -149,8 +149,9 @@ public class ScrollScreenShot {
                         int topy1 = img1.height / 4; // 0.25 of screen height
                         int bottomy1 = topy1 + img1.height * params.scrolluponly;
                         int x1 = img1.width / 2; // middle of screen width
+                        int steps = bottomy1 / 100000;
 
-                        scrollScreenSlowly(device, params.inputDeviceNo, x1, topy1, x1, bottomy1, params.inertia);
+                        scrollScreen(device, params.inputDeviceNo, x1, topy1, x1, bottomy1, params.inertia,steps);
 
                         return 0;
                     }
@@ -239,7 +240,7 @@ public class ScrollScreenShot {
                                 int bottomy = topy + img.height / 2; // 0.75 of screen height
                                 int x = img.width / 2; // middle of screen width
 
-                                scrollScreen(device, params.inputDeviceNo, x, bottomy, x, topy, params.inertia);
+                                scrollScreen(device, params.inputDeviceNo, x, bottomy, x, topy, params.inertia, params.steps);
                             }
 
                             if (params.direction.equals(Params.DIR_LEFTRIGHT)) {
@@ -248,7 +249,7 @@ public class ScrollScreenShot {
                                 int leftx = img.width / 10; // 0.2 of screen width
                                 int rightx = img.width - leftx; // 0.8 of screen width
 
-                                scrollScreen(device, params.inputDeviceNo, rightx, y, leftx, y, params.inertia);
+                                scrollScreen(device, params.inputDeviceNo, rightx, y, leftx, y, params.inertia, params.steps);
                             }
                             // }
 
@@ -286,7 +287,8 @@ public class ScrollScreenShot {
         return 0;
     }
 
-    void scrollScreenSlowly(IDevice device, int input, int x1, int y1, int x2, int y2, int inertia) throws TimeoutException, AdbCommandRejectedException, ShellCommandUnresponsiveException, IOException {
+
+    void scrollScreen(IDevice device, int input, int x1, int y1, int x2, int y2, int inertia, int steps) throws TimeoutException, AdbCommandRejectedException, ShellCommandUnresponsiveException, IOException {
 
         // simulate finger press
 
@@ -301,70 +303,6 @@ public class ScrollScreenShot {
         //device.executeShellCommand("sendevent /dev/input/event2 3 58 50", rec); // ABS_MT_PRESSURE (58) - pressure of the touch
         //device.executeShellCommand("sendevent /dev/input/event2 0 2 0", rec); // end of separate touch data
         device.executeShellCommand("sendevent /dev/input/event" + input + " 0 0 0", rec); // end of report
-
-        int steps = y2 / 100000;
-
-        // simulate finger drag
-        for (int i = 1; i <= steps; i++) {
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            int x = x1 + i * (x2 - x1) / steps;
-            int y = y1 + i * (y2 - y1) / steps;
-
-            if (i == steps) {
-                x -= inertia;
-                y -= inertia;
-            }
-
-            device.executeShellCommand("sendevent /dev/input/event" + input + " 3 53 " + x, rec); // ABS_MT_POSITION_X (53) - x coordinate of the touch
-            device.executeShellCommand("sendevent /dev/input/event" + input + " 3 54 " + y, rec); // ABS_MT_POSITION_Y (54) - y coordinate of the touch
-            device.executeShellCommand("sendevent /dev/input/event" + input + " 3 49 6", rec); // ABS_MT_TOUCH_MINOR (49)
-            device.executeShellCommand("sendevent /dev/input/event" + input + " 0 0 0", rec); // end of report
-
-        }
-
-        // stop dragging finger to avoid kinetic scroll
-        for (int i = 1; i < 3; i++) {
-
-            device.executeShellCommand("sendevent /dev/input/event" + input + " 3 53 " + (x2 - inertia), rec); // ABS_MT_POSITION_X (53) - x coordinate of the touch
-            device.executeShellCommand("sendevent /dev/input/event" + input + " 3 54 " + (y2 - inertia), rec); // ABS_MT_POSITION_Y (54) - y coordinate of the touch
-            device.executeShellCommand("sendevent /dev/input/event" + input + " 3 49 6", rec); // ABS_MT_TOUCH_MINOR (49)
-            device.executeShellCommand("sendevent /dev/input/event" + input + " 0 0 0", rec); // end of report
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-
-        // simulate finger release
-        release(device, input);
-
-    }
-
-    void scrollScreen(IDevice device, int input, int x1, int y1, int x2, int y2, int inertia) throws TimeoutException, AdbCommandRejectedException, ShellCommandUnresponsiveException, IOException {
-
-        // simulate finger press
-
-        device.executeShellCommand("sendevent /dev/input/event" + input + " 3 57 111", rec); // ABS_MT_TRACKING_ID (57) - ID of the touch (important for multi-touch reports)
-        //device.executeShellCommand("sendevent /dev/input/event2 3 47 0", rec); // ABS_MT_SLOT
-        device.executeShellCommand("sendevent /dev/input/event" + input + " 3 63 1", rec); // 3f ????
-        device.executeShellCommand("sendevent /dev/input/event" + input + " 1 330 1", rec); // 14A = 330 = BTN_TOUCH / DOWN
-        device.executeShellCommand("sendevent /dev/input/event" + input + " 3 53 " + x1, rec); // ABS_MT_POSITION_X (53) - x coordinate of the touch
-        device.executeShellCommand("sendevent /dev/input/event" + input + " 3 54 " + y1, rec); // ABS_MT_POSITION_Y (54) - y coordinate of the touch
-        device.executeShellCommand("sendevent /dev/input/event" + input + " 3 48 5", rec); // ABS_MT_TOUCH_MAJOR (48) - basically width of your finger tip in pixels
-        device.executeShellCommand("sendevent /dev/input/event" + input + " 3 49 6", rec); // ABS_MT_TOUCH_MINOR (49)
-        //device.executeShellCommand("sendevent /dev/input/event2 3 58 50", rec); // ABS_MT_PRESSURE (58) - pressure of the touch
-        //device.executeShellCommand("sendevent /dev/input/event2 0 2 0", rec); // end of separate touch data
-        device.executeShellCommand("sendevent /dev/input/event" + input + " 0 0 0", rec); // end of report
-
-        int steps = 1;
 
         // simulate finger drag
         for (int i = 1; i <= steps; i++) {

@@ -63,7 +63,7 @@ Usage: com.pgssoft.scrollscreenshot.ScrollScreenShot [options]
         Overrides any other setting
         Default: 0 (not scrolling)
     -x, --steps
-        Number of steps to drag the screen. If there is a problem (doesn't scroll correctly), try 10.
+        Number of steps to scroll the screen. If there is a problem (doesn't scroll correctly), try 10.
         Default: 1
 
 ```

@@ -83,6 +83,9 @@ public class Params {
     @Parameter(names = {"-h", "--help"}, description = "Display this help", help = true)
     boolean help;
 
+    @Parameter(names = {"-x", "--steps"}, description = "Number of steps to drag the screen. If there is a problem with the screenshot, try 10. Default is 1 (should work)")
+    public int steps = 1;
+
 
     public static class StichtValidator implements IParameterValidator {
         @Override
