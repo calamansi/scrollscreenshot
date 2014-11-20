@@ -8,7 +8,7 @@ This tool makes a number of screenshots, scrolling screen content automatically 
 
 
 
-This software has been modified by [Calamansi](https://github.com/calamansi/) in the following way:
+**This software has been modified** by [Calamansi](https://github.com/calamansi/) in the following way:
  * take several multi-page (composite) screen shots (use option -f)
  * scroll to the very top of a long screen to stitch top-down without taking screenshots (see Todo)
    (use option -t to determine the number of pages to scroll up)
@@ -62,6 +62,9 @@ Usage: com.pgssoft.scrollscreenshot.ScrollScreenShot [options]
         t > 0 giving the number of pages (screen heights) to scroll up.
         Overrides any other setting
         Default: 0 (not scrolling)
+    -x, --steps
+        Number of steps to drag the screen. If there is a problem (doesn't scroll correctly), try 10.
+        Default: 1
 
 ```
 
@@ -86,28 +89,28 @@ and move finger on screen. You will see something like
 /dev/input/event2: EV_ABS       ABS_MT_TOUCH_MINOR   0000000e
 /dev/input/event2: EV_ABS       003c                 ffffffb3
 ```
-In your case device you are looking for has number **2**.
+In your case device you are looking for has number **2** (/dev/input/event **2** ).
 
 
 You can now start screen capturing. Download [latest multi-page scrollscreenshot binary](https://github.com/calamansi/scrollscreenshot/blob/master/scrollscreenshotmultipage.jar?raw=true), unlock screen, start app you want to scroll-capture and type (replace *2* by your device input number):
 
 ```
-java -jar scrollscreenshotmultipage.jar com.pgssoft.scrollscreenshot.ScrollScreenShot -i 2
+java -jar scrollscreenshotmultipage.jar -i 2
 ```
 
-scroll up by 1000 screen heights
+Scroll up by 1000 screen heights
 ```
-java -jar scrollscreenshotmultipage.jar com.pgssoft.scrollscreenshot.ScrollScreenShot -i 2 -t 1000
-```
-
-take 10 multi-page (composite) screenshots consisting of 25 pages each (my phone as an inertia of 8 px) seamlessly stiched.
-```
-java -jar scrollscreenshotmultipage.jar com.pgssoft.scrollscreenshot.ScrollScreenShot -i 2  -e 8 -s full -c 25 -f 10
+java -jar scrollscreenshotmultipage.jar -i 2 -t 1000
 ```
 
+Take 10 multi-page (composite) screenshots consisting of 25 pages each seamlessly stitched.
+```
+java -jar scrollscreenshotmultipage.jar -i 2  -s full -c 25 -f 10
+```
 
 
-If eveything goes well, you will get file `out_01.png` with something like:
+
+If everything goes well, you will get file `out_01.png` with something like:
 
 <img src="https://github.com/PGSSoft/scrollscreenshot/blob/master/sample.png" alt="SAMPLE" width="200">
 
@@ -132,8 +135,7 @@ Changelog
 Acknowledgments
 ---------------
 
-* software development by [PGS Software SA](http://www.pgs-soft.com)
-  https://github.com/PGSSoft/scrollscreenshot/
+* software development by [PGS Software SA](https://github.com/PGSSoft/scrollscreenshot/)
 
 * description of input events was taken from
 [this blog post](http://ktnr74.blogspot.com/2013/06/emulating-touchscreen-interaction-with.html)
