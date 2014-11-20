@@ -40,7 +40,8 @@ Usage: com.pgssoft.scrollscreenshot.ScrollScreenShot [options]
        non-zero value if there are duplicated stripes.
        Default: 0
     -f, --files
-       Number of composite screenshots (files) to be created (use "-c" to determine number of pages in a composite)
+       Number of composite screenshots (files) to be created
+       (use "-c" to determine number of pages in a composite)
        Default: 0
     -h, --help
        Display this help
@@ -63,7 +64,9 @@ Usage: com.pgssoft.scrollscreenshot.ScrollScreenShot [options]
         Overrides any other setting
         Default: 0 (not scrolling)
     -x, --steps
-        Number of steps to scroll the screen. If there is a problem (doesn't scroll correctly), try 10.
+        Number of steps to scroll one page - the fewer steps the faster 
+        the scrolling. If there is a problem with fast scrolling (1), 
+        try 10.
         Default: 1
 
 ```
