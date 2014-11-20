@@ -59,15 +59,15 @@ Usage: com.pgssoft.scrollscreenshot.ScrollScreenShot [options]
        separate (separate files)
        Default: full
     -t, --top
-        Scroll up only, do not take screenshots
-        t > 0 giving the number of pages (screen heights) to scroll up.
-        Overrides any other setting
-        Default: 0 (not scrolling)
+       Scroll up only, do not take screenshots
+       t > 0 giving the number of pages (screen heights) to scroll up.
+       Overrides any other setting
+       Default: 0 (not scrolling)
     -x, --steps
-        Number of steps to scroll one page - the fewer steps the faster 
-        the scrolling. If there is a problem with fast scrolling (1), 
-        try 10.
-        Default: 1
+       Number of steps to scroll one page - the fewer steps the faster 
+       the scrolling. If there is a problem with fast scrolling (1), 
+       try 10.
+       Default: 1
 
 ```
 
