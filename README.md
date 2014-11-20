@@ -20,11 +20,13 @@ This tool makes a number of screenshots, scrolling screen content automatically 
 ![Illustration how images are merged](https://github.com/PGSSoft/scrollscreenshot/blob/master/illustration.png "Illustration how images are merged")
 
 
-Documentation:
+Documentation
 --------------
 
 ```
-Usage: com.pgssoft.scrollscreenshot.ScrollScreenShot [options]
+Usage: com.pgssoft.scrollscreenshot.ScrollScreenShot [options] 
+       or
+       java -jar scrollscreenshotmultipage.jar [options]
   Options:
     -c, --count
        Number of pages in one composite screenshot
@@ -92,7 +94,7 @@ and move finger on screen. You will see something like
 /dev/input/event2: EV_ABS       ABS_MT_TOUCH_MINOR   0000000e
 /dev/input/event2: EV_ABS       003c                 ffffffb3
 ```
-In your case device you are looking for has number **2** (/dev/input/event **2** ).
+In your case device you are looking for has number **2** (from */dev/input/event2*).
 
 
 You can now start screen capturing. Download [latest multi-page scrollscreenshot binary](https://github.com/calamansi/scrollscreenshot/blob/master/scrollscreenshotmultipage.jar?raw=true), unlock screen, start app you want to scroll-capture and type (replace *2* by your device input number):
@@ -108,7 +110,7 @@ java -jar scrollscreenshotmultipage.jar -i 2 -t 1000
 
 Take 10 multi-page (composite) screenshots consisting of 25 pages each seamlessly stitched.
 ```
-java -jar scrollscreenshotmultipage.jar -i 2  -s full -c 25 -f 10
+java -jar scrollscreenshotmultipage.jar -i 2 -c 25 -f 10
 ```
 
 
@@ -122,7 +124,7 @@ Left-to-right mode will give you something like this:
 <img src="https://github.com/PGSSoft/scrollscreenshot/blob/master/samplehorizontal.png" alt="SAMPLE" width="800">
 
 
-Todo (original source):
+Todo ([original source](https://github.com/PGSSoft/scrollscreenshot/))
 -----
 
 * scrolling in all 4 directions
