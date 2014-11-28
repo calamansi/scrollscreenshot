@@ -33,7 +33,7 @@ Usage: com.pgssoft.scrollscreenshot.ScrollScreenShot [options]
        Device ID, first device is used if not specified (i.e. "4df1902336814fa6"
        or "192.168.56.102:5555")
     -d, --direction
-       Swipe direction: topdown (default), leftright (implies "--stitch none")
+       Swipe direction: topdown (default), bottomup, leftright (implies "--stitch none")
        Default: topdown
     -e, --inertia
        Inertia of content, how many pixels are required to start dragging. Use
@@ -122,7 +122,7 @@ Left-to-right mode will give you something like this:
 Todo (original source):
 -----
 
-* scrolling in all 4 directions
+* scrolling in all 4 directions (*update* v 0.2 of this fork: bottom-up screenshots are possible)
 * automatic detection of scroll area edge
 
 
@@ -130,6 +130,7 @@ Changelog
 ---------
 
 * 0.1 - forked and modified to take several composite screenshots rather than just one as in the [original source](https://github.com/PGSSoft/scrollscreenshot/)
+* 0.2 - bottom up screenshots ("`-d bottomup`") - consider that the `-e, --inertia` might be a negative value now! ;-)
 
 
 Acknowledgments
