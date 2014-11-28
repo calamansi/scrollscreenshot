@@ -20,11 +20,13 @@ This tool makes a number of screenshots, scrolling screen content automatically 
 ![Illustration how images are merged](https://github.com/PGSSoft/scrollscreenshot/blob/master/illustration.png "Illustration how images are merged")
 
 
-Documentation:
+Documentation
 --------------
 
 ```
-Usage: com.pgssoft.scrollscreenshot.ScrollScreenShot [options]
+Usage: com.pgssoft.scrollscreenshot.ScrollScreenShot [options] 
+       or
+       java -jar scrollscreenshotmultipage.jar [options]
   Options:
     -c, --count
        Number of pages in one composite screenshot
@@ -40,7 +42,8 @@ Usage: com.pgssoft.scrollscreenshot.ScrollScreenShot [options]
        non-zero value if there are duplicated stripes.
        Default: 0
     -f, --files
-       Number of composite screenshots (files) to be created (use "-c" to determine number of pages in a composite)
+       Number of composite screenshots (files) to be created
+       (use "-c" to determine number of pages in a composite)
        Default: 0
     -h, --help
        Display this help
@@ -58,13 +61,15 @@ Usage: com.pgssoft.scrollscreenshot.ScrollScreenShot [options]
        separate (separate files)
        Default: full
     -t, --top
-        Scroll up only, do not take screenshots
-        t > 0 giving the number of pages (screen heights) to scroll up.
-        Overrides any other setting
-        Default: 0 (not scrolling)
+       Scroll up only, do not take screenshots
+       t > 0 giving the number of pages (screen heights) to scroll up.
+       Overrides any other setting
+       Default: 0 (not scrolling)
     -x, --steps
-        Number of steps to scroll the screen. If there is a problem (doesn't scroll correctly), try 10.
-        Default: 1
+       Number of steps to scroll one page - the fewer steps the faster 
+       the scrolling. If there is a problem with fast scrolling (1), 
+       try 10.
+       Default: 1
 
 ```
 
@@ -89,7 +94,7 @@ and move finger on screen. You will see something like
 /dev/input/event2: EV_ABS       ABS_MT_TOUCH_MINOR   0000000e
 /dev/input/event2: EV_ABS       003c                 ffffffb3
 ```
-In your case device you are looking for has number **2** (/dev/input/event **2** ).
+In your case device you are looking for has number **2** (from */dev/input/event2*).
 
 
 You can now start screen capturing. Download [latest multi-page scrollscreenshot binary](https://github.com/calamansi/scrollscreenshot/blob/master/scrollscreenshotmultipage.jar?raw=true), unlock screen, start app you want to scroll-capture and type (replace *2* by your device input number):
@@ -105,7 +110,7 @@ java -jar scrollscreenshotmultipage.jar -i 2 -t 1000
 
 Take 10 multi-page (composite) screenshots consisting of 25 pages each seamlessly stitched.
 ```
-java -jar scrollscreenshotmultipage.jar -i 2  -s full -c 25 -f 10
+java -jar scrollscreenshotmultipage.jar -i 2 -c 25 -f 10
 ```
 
 
@@ -119,7 +124,7 @@ Left-to-right mode will give you something like this:
 <img src="https://github.com/PGSSoft/scrollscreenshot/blob/master/samplehorizontal.png" alt="SAMPLE" width="800">
 
 
-Todo (original source):
+Todo ([original source](https://github.com/PGSSoft/scrollscreenshot/))
 -----
 
 * scrolling in all 4 directions (*update* v 0.2 of this fork: bottom-up screenshots are possible)
