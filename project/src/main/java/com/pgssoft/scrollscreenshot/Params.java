@@ -42,6 +42,7 @@ public class Params {
     public final static String STITCH_SEPARATE = "separate";
 
     public final static String DIR_TOPDOWN = "topdown";
+    public final static String DIR_BOTTOMUP = "bottomup";
     public final static String DIR_LEFTRIGHT = "leftright";
 
     @Parameter(names = {"-i", "--inputdevice"}, description = "Digitizer input device number, N in /dev/input/eventN", required = true)
@@ -71,6 +72,9 @@ public class Params {
     @Parameter(names = {"-n", "--nameprefix"}, description = "Output filename prefix")
     String nameprefix = "out";
 
+    @Parameter(names = {"-o", "--dateprefix"}, description = "Include date in the filename \"<nameprefix>_yyyMMdd_<fileNumber>.png\"")
+    public boolean dateprefix = true;
+
     @Parameter(names = {"-e", "--inertia"}, description = "Inertia of content, how many pixels are required to start dragging. Use non-zero value if there are duplicated stripes.")
     Integer inertia = 0;
 
@@ -87,6 +91,7 @@ public class Params {
     public int steps = 1;
 
 
+
     public static class StichtValidator implements IParameterValidator {
         @Override
         public void validate(String name, String value) throws ParameterException {
@@ -101,8 +106,9 @@ public class Params {
         @Override
         public void validate(String name, String value) throws ParameterException {
             if (false == value.equals(DIR_LEFTRIGHT) &&
-                false == value.equals(DIR_TOPDOWN)) {
-                throw new ParameterException("Parameter " + name + " must be one of: " + DIR_TOPDOWN + ", " + DIR_LEFTRIGHT
+                false == value.equals(DIR_TOPDOWN) &&
+                false == value.equals(DIR_BOTTOMUP)) {
+                throw new ParameterException("Parameter " + name + " must be one of: " + DIR_TOPDOWN + ", "+ DIR_BOTTOMUP + ", " + DIR_LEFTRIGHT
                 );
             }
         }
